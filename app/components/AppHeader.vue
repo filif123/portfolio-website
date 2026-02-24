@@ -21,26 +21,22 @@
         >
           {{ link.label }}
         </a>
-      </nav>
-
-      <div class="flex items-center gap-3">
         <div
           ref="projectsDropdownRef"
-          class="relative hidden items-center gap-2 text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 md:flex"
+          class="relative"
+          @mouseenter="handleMouseEnter"
+          @mouseleave="handleMouseLeave"
         >
-          <button
-            type="button"
-            class="inline-flex items-center gap-2 rounded-full border border-slate-200/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-600 transition hover:border-slate-300 hover:text-slate-900 dark:border-slate-700/60 dark:text-slate-300 dark:hover:text-white"
-            aria-haspopup="menu"
-            :aria-expanded="projectsOpen"
-            @click="toggleProjects"
+          <a
+            href="/#projects"
+            class="transition hover:text-slate-900 dark:hover:text-white inline-flex items-center gap-2"
           >
             Projects
-            <VueIcon :name="projectsOpen ? 'ph:caret-up' : 'ph:caret-down'" class="text-xs" />
-          </button>
+            <VueIcon name="ph:caret-down" class="text-xs" />
+          </a>
           <div
             v-if="projectsOpen"
-            class="absolute right-0 top-9 w-56 rounded-2xl border border-slate-200/70 bg-white/95 p-2 text-[11px] uppercase tracking-[0.2em] text-slate-600 shadow-lg shadow-slate-900/10 backdrop-blur dark:border-slate-700/60 dark:bg-slate-950/90 dark:text-slate-300"
+            class="absolute left-1/2 top-full mt-2 w-56 -translate-x-1/2 rounded-2xl border border-slate-200/70 bg-white/95 p-2 text-[11px] uppercase tracking-[0.2em] text-slate-600 shadow-lg shadow-slate-900/10 backdrop-blur dark:border-slate-700/60 dark:bg-slate-950/90 dark:text-slate-300"
             role="menu"
           >
             <a
@@ -49,14 +45,15 @@
               :href="project.href"
               class="flex items-center justify-between rounded-xl px-3 py-2 font-semibold transition hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-900/60 dark:hover:text-white"
               role="menuitem"
-              @click="projectsOpen = false"
             >
               {{ project.label }}
               <VueIcon name="ph:arrow-up-right" class="text-xs" />
             </a>
           </div>
         </div>
+      </nav>
 
+      <div class="flex items-center gap-3">
         <button
           type="button"
           class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200/70 bg-white text-slate-700 shadow-sm transition hover:shadow-md dark:border-slate-700/60 dark:bg-slate-900 dark:text-slate-100"
@@ -73,26 +70,32 @@
       </div>
     </div>
 
-    <div class="border-t border-slate-200/70 px-6 pb-4 pt-3 dark:border-slate-800/80 lg:hidden">
-      <div class="flex flex-wrap gap-3 text-sm text-slate-600 dark:text-slate-300">
+    <div class="border-t border-slate-200/70 px-4 pb-3 pt-2 dark:border-slate-800/80 lg:hidden">
+      <div class="flex flex-wrap gap-2 text-sm text-slate-600 dark:text-slate-300">
         <a
           v-for="link in navLinks"
           :key="link.href"
           :href="link.href"
-          class="rounded-full border border-slate-200/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] transition hover:border-slate-300 hover:text-slate-900 dark:border-slate-700/60 dark:text-slate-200"
+          class="rounded-full border border-slate-200/70 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] transition hover:border-slate-300 hover:text-slate-900 dark:border-slate-700/60 dark:text-slate-200"
         >
           {{ link.label }}
         </a>
+        <a
+          href="/#projects"
+          class="rounded-full border border-slate-200/70 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] transition hover:border-slate-300 hover:text-slate-900 dark:border-slate-700/60 dark:text-slate-200"
+        >
+          Projects
+        </a>
       </div>
       <div
-        class="mt-4 flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400"
+        class="mt-2 flex flex-wrap items-center gap-1.5 text-[10px] uppercase tracking-[0.15em] text-slate-500 dark:text-slate-400"
       >
-        <span class="mr-1">Projects</span>
+        <span class="text-[9px] font-medium opacity-70">Projects:</span>
         <a
           v-for="project in projectLinks"
           :key="project.href"
           :href="project.href"
-          class="rounded-full border border-slate-200/70 px-3 py-1 font-semibold text-slate-600 transition hover:border-slate-300 hover:text-slate-900 dark:border-slate-700/60 dark:text-slate-300"
+          class="rounded-full border border-slate-200/70 px-2 py-0.5 text-[9px] font-semibold text-slate-600 transition hover:border-slate-300 hover:text-slate-900 dark:border-slate-700/60 dark:text-slate-300"
         >
           {{ project.label }}
         </a>
@@ -102,12 +105,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 import VueIcon from '@kalimahapps/vue-icons/VueIcon';
 
 const navLinks = [
   { label: 'About', href: '/#about' },
-  { label: 'Projects', href: '/#projects' },
   { label: 'Education', href: '/#education' },
   { label: 'Certificates', href: '/#certificates' },
   { label: 'Experience', href: '/#experience' },
@@ -116,12 +118,12 @@ const navLinks = [
 ];
 
 const projectLinks = useState<{ label: string; href: string }[]>('projectLinks', () => [
-  { label: 'Shopking', href: '/shopking' },
-  { label: 'ShopkingApp', href: '/shopkingapp' },
-  { label: 'GVDEditor', href: '/gvdeditor' },
-  { label: 'RawBankEditor', href: '/rawbankeditor' },
-  { label: 'ExControls', href: '/excontrols' },
-  { label: 'AlgoCompare', href: '/algocompare' }
+  { label: 'Shopking', href: '/projects/shopking' },
+  { label: 'ShopkingApp', href: '/projects/shopkingapp' },
+  { label: 'GVDEditor', href: '/projects/gvdeditor' },
+  { label: 'RawBankEditor', href: '/projects/rawbankeditor' },
+  { label: 'ExControls', href: '/projects/excontrols' },
+  { label: 'AlgoCompare', href: '/projects/algocompare' }
 ]);
 
 const colorMode = useColorMode();
@@ -166,24 +168,19 @@ const startViewTransition = (event: MouseEvent) => {
 };
 
 const projectsOpen = ref(false);
-const projectsDropdownRef = ref<HTMLElement | null>(null);
+let closeTimeout: ReturnType<typeof setTimeout> | null = null;
 
-const toggleProjects = () => {
-  projectsOpen.value = !projectsOpen.value;
-};
-
-const handleOutsideClick = (event: MouseEvent) => {
-  if (!projectsDropdownRef.value) return;
-  if (!projectsDropdownRef.value.contains(event.target as Node)) {
-    projectsOpen.value = false;
+const handleMouseEnter = () => {
+  if (closeTimeout) {
+    clearTimeout(closeTimeout);
+    closeTimeout = null;
   }
+  projectsOpen.value = true;
 };
 
-onMounted(() => {
-  document.addEventListener('click', handleOutsideClick);
-});
-
-onBeforeUnmount(() => {
-  document.removeEventListener('click', handleOutsideClick);
-});
+const handleMouseLeave = () => {
+  closeTimeout = setTimeout(() => {
+    projectsOpen.value = false;
+  }, 150);
+};
 </script>

@@ -69,18 +69,6 @@ const gallery = [
   {
     alt: 'Example 4',
     src: '/images/shopking/example4.png'
-  },
-  {
-    alt: 'Main screen of the Android app',
-    src: '/images/shopkingapp/example1.jpg'
-  },
-  {
-    alt: 'Customer Purchase screen',
-    src: '/images/shopkingapp/example2.jpg'
-  },
-  {
-    alt: 'Payment screen',
-    src: '/images/shopkingapp/example3.jpg'
   }
 ];
 </script>

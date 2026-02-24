@@ -72,8 +72,8 @@
         </div>
         <div
           ref="viewerRef"
-          class="mt-4 flex max-h-[75vh] w-full items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-slate-950/60 p-4"
-          :class="zoomLevel > 1 ? 'cursor-grab' : 'cursor-default'"
+          class="mt-4 flex max-h-[80vh] w-full items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-slate-950/60 p-4"
+          :class="isDragging ? 'cursor-grabbing' : zoomLevel > 1 ? 'cursor-grab' : 'cursor-default'"
           @wheel.prevent="onWheel"
           @pointerdown="onPointerDown"
           @pointerup="onPointerUp"
@@ -81,10 +81,11 @@
           @pointermove="onPointerMove"
         >
           <img
-            class="select-none object-contain transition"
-            :class="zoomLevel > 1 ? 'cursor-grabbing' : ''"
+            class="max-h-[calc(80vh-2rem)] max-w-full select-none object-contain"
+            :class="isDragging ? '' : 'transition-transform'"
             :style="{
-              transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoomLevel})`
+              transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoomLevel})`,
+              touchAction: 'none'
             }"
             :src="activeImage.src"
             :alt="activeImage.alt"
@@ -148,21 +149,30 @@ const onWheel = (event: WheelEvent) => {
   zoomOut();
 };
 
+const viewerRef = ref<HTMLElement | null>(null);
+
 const onPointerDown = (event: PointerEvent) => {
   if (zoomLevel.value <= 1) return;
   isDragging.value = true;
   dragStart.value = { x: event.clientX, y: event.clientY };
   panStart.value = { ...pan.value };
+  if (viewerRef.value) {
+    (event.target as HTMLElement).setPointerCapture(event.pointerId);
+  }
 };
 
 const onPointerMove = (event: PointerEvent) => {
   if (!isDragging.value) return;
+  event.preventDefault();
   const dx = event.clientX - dragStart.value.x;
   const dy = event.clientY - dragStart.value.y;
   pan.value = { x: panStart.value.x + dx, y: panStart.value.y + dy };
 };
 
-const onPointerUp = () => {
+const onPointerUp = (event: PointerEvent) => {
+  if (isDragging.value && viewerRef.value) {
+    (event.target as HTMLElement).releasePointerCapture(event.pointerId);
+  }
   isDragging.value = false;
 };
 

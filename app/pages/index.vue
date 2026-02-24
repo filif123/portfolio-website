@@ -128,30 +128,6 @@
       </div>
     </section>
 
-    <section id="projects" class="scroll-mt-28 py-16">
-      <div class="mx-auto w-full max-w-6xl px-6">
-        <SectionHeader
-          title="Projects"
-          description="A few highlights to showcase the type of work I enjoy."
-        />
-        <div class="mt-10 grid gap-6 lg:grid-cols-3">
-          <InfoCard
-            v-for="project in projects"
-            :key="project.id"
-            :url="project.url"
-            :title="project.title"
-            :meta-left="project.metaLeft"
-            :meta-right="project.metaRight"
-          >
-            <p>{{ project.description }}</p>
-            <p v-if="project.stack" class="mt-3 text-xs uppercase tracking-[0.2em] text-slate-400">
-              {{ project.stack }}
-            </p>
-          </InfoCard>
-        </div>
-      </div>
-    </section>
-
     <section id="education" class="scroll-mt-28 py-16">
       <div class="mx-auto w-full max-w-6xl px-6">
         <SectionHeader
@@ -205,6 +181,30 @@
       </div>
     </section>
 
+    <section id="projects" class="scroll-mt-28 py-16">
+      <div class="mx-auto w-full max-w-6xl px-6">
+        <SectionHeader
+          title="Projects"
+          description="A few highlights to showcase the type of work I enjoy."
+        />
+        <div class="mt-10 grid gap-6 lg:grid-cols-3">
+          <InfoCard
+            v-for="project in projects"
+            :key="project.id"
+            :url="project.url"
+            :title="project.title"
+            :meta-left="project.metaLeft"
+            :meta-right="project.metaRight"
+          >
+            <p>{{ project.description }}</p>
+            <p v-if="project.stack" class="mt-3 text-xs uppercase tracking-[0.2em] text-slate-400">
+              {{ project.stack }}
+            </p>
+          </InfoCard>
+        </div>
+      </div>
+    </section>
+
     <section id="contact" class="scroll-mt-28 py-16">
       <div
         class="mx-auto flex w-full max-w-6xl flex-col items-start justify-between gap-8 rounded-3xl border border-slate-200/70 bg-white/70 px-6 py-12 shadow-lg shadow-slate-900/10 backdrop-blur dark:border-slate-800/70 dark:bg-slate-900/40 md:flex-row md:items-center"
@@ -246,29 +246,59 @@ const heroStats = [
 
 const projects = [
   {
-    id: 'project-public-sector',
-    title: 'Public sector IS modules',
-    metaLeft: '2023 – Present',
-    metaRight: '.NET',
-    description: 'Contributed to modules that improve internal workflows for state services.',
-    stack: 'C# • .NET • SQL',
-    url: '/shopking'
+    id: 'shopking',
+    title: 'Shopking',
+    metaLeft: '07/2019 - 03/2020',
+    metaRight: 'Desktop app',
+    description: 'A simple cash register system for retail operations.',
+    stack: 'Java • JavaFX',
+    url: '/projects/shopking'
   },
   {
-    id: 'project-student-tools',
-    title: 'Student tools suite',
-    metaLeft: '2022 – 2024',
-    metaRight: 'Vue',
-    description: 'Built lightweight tools for coursework planning and task tracking.',
-    stack: 'Vue 3 • TypeScript'
+    id: 'shopkingapp',
+    title: 'ShopkingApp',
+    metaLeft: '05/2020 - 07/2020',
+    metaRight: 'Mobile app',
+    description: 'Android application for the Shopking cash register system.',
+    stack: 'Java • Android',
+    url: '/projects/shopkingapp'
   },
   {
-    id: 'project-portfolio',
-    title: 'Personal portfolio',
-    metaLeft: '2024 – 2025',
-    metaRight: 'Nuxt',
-    description: 'Designed and iterated on a portfolio that highlights growth and goals.',
-    stack: 'Nuxt • Tailwind CSS'
+    id: 'gvdeditor',
+    title: 'GVDEditor',
+    metaLeft: '05/2020 - 10/2022',
+    metaRight: 'Desktop app',
+    description: 'Editor and generator of text files representing the graph for the INISS program.',
+    stack: 'C# • Windows Forms',
+    url: '/projects/gvdeditor'
+  },
+  {
+    id: 'rawbankeditor',
+    title: 'RawBankEditor',
+    metaLeft: '07/2021 - 10/2022',
+    metaRight: 'Desktop app',
+    description: 'Program for editing sound bank data for the INISS program.',
+    stack: 'C# • Windows Forms',
+    url: '/projects/rawbankeditor'
+  },
+  {
+    id: 'excontrols',
+    title: 'ExControls',
+    metaLeft: '09/2021 - 09/2022',
+    metaRight: 'Library',
+    description: 'Extended controls for Windows Forms with enhanced visual customization.',
+    stack: 'C# • Windows Forms',
+    url: '/projects/excontrols'
+  },
+  {
+    id: 'algocompare',
+    title: 'AlgoCompare',
+    metaLeft: '09/2022 - 05/2025',
+    metaRight: 'Web app',
+    description:
+      'Interactive system for comparative visualisation of algorithms and data structures.',
+    stack: 'Vue 3 • Nuxt • TypeScript • Prisma • tRPC • Docker',
+    url: '/projects/algocompare'
   }
 ];
 
@@ -324,7 +354,7 @@ const experienceTimeline = [
     title: 'KDC s.r.o. | DITEC a.s.',
     startDate: '2025-07',
     endDate: null,
-    location: 'Full time', //TODO junior/senior
+    location: 'Full time',
     description:
       'Cooperation in the implementation of information systems in .NET technology for the state.',
     meta: '.NET'
@@ -337,7 +367,7 @@ const experienceTimeline = [
     description:
       'Cooperation in the implementation of information systems in .NET technology for the state.',
     meta: '.NET'
-  },
+  } /*,
   {
     title: 'LABAŠ s.r.o.',
     startDate: '2022-06',
@@ -345,7 +375,7 @@ const experienceTimeline = [
     location: 'Part time',
     description: 'Preparing goods according to the order in the bulk warehouse.',
     meta: 'Logistics'
-  }
+  }*/
 ];
 
 const currentJob = computed(() => {
