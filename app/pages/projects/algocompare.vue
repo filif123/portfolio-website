@@ -1,53 +1,49 @@
 <template>
-  <div class="space-y-12 pb-16 pt-10">
-    <ProjectHero
-      eyebrow="Project"
-      title="AlgoComapre"
-      subtitle="A comparative visualizer of algorithms and data structures"
-      :actions="heroActions"
-    />
-
-    <ProjectMetaGrid :items="metaItems" />
-
-    <section class="mx-auto w-full max-w-6xl px-6">
-      <div class="grid gap-2">
-        <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">About</h2>
-        <p class="mt-4 text-base text-slate-600 dark:text-slate-300">
-          AlgoCompare is interactive system for comparative visualisation of algorithms and data
-          structures. The application was developed as part of my bachelor and master thesis.
-        </p>
-        <p class="text-base text-slate-600 dark:text-slate-300">
-          The application supports 3 basic modes:
-        </p>
-        <ul class="list-disc list-inside">
-          <li class="text-base text-slate-600 dark:text-slate-300">
-            <strong>Comparative mode</strong>, where the user selects the algorithms or data
-            structures he wants to compare and enters input values that are applied to all selected
-            algorithms. Within this mode, there is a special mode available for data structure
-            visualizations, namely Interactive mode, which allows users to enter operations and
-            input values while visualizing data structures.
-          </li>
-          <li class="text-base text-slate-600 dark:text-slate-300">
-            <strong>Training mode</strong> is for students who want to test their understanding of a
-            given algorithm. The student chooses an algorithm and then interacts with the
-            visualization until they have solved the exercise.
-          </li>
-          <li class="text-base text-slate-600 dark:text-slate-300">
-            <strong>Test mode</strong> allows teachers to create and manage tests for students to
-            take.
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <ProjectGallery :images="gallery" />
-  </div>
+  <ProjectLayout
+    title="AlgoCompare"
+    subtitle="A comparative visualizer of algorithms and data structures"
+    :actions="actions"
+    :meta-items="metaItems"
+    :gallery="gallery"
+  >
+    <ProjectContent>
+      <p class="mt-4 text-base text-slate-600 dark:text-slate-300">
+        AlgoCompare is interactive system for comparative visualisation of algorithms and data
+        structures. The application was developed as part of my bachelor and master thesis.
+      </p>
+      <p class="text-base text-slate-600 dark:text-slate-300">
+        The application supports 3 basic modes:
+      </p>
+      <ul class="list-inside list-disc">
+        <li class="text-base text-slate-600 dark:text-slate-300">
+          <strong>Comparative mode</strong>, where the user selects the algorithms or data
+          structures he wants to compare and enters input values that are applied to all selected
+          algorithms. Within this mode, there is a special mode available for data structure
+          visualizations, namely Interactive mode, which allows users to enter operations and input
+          values while visualizing data structures.
+        </li>
+        <li class="text-base text-slate-600 dark:text-slate-300">
+          <strong>Training mode</strong> is for students who want to test their understanding of a
+          given algorithm. The student chooses an algorithm and then interacts with the
+          visualization until they have solved the exercise.
+        </li>
+        <li class="text-base text-slate-600 dark:text-slate-300">
+          <strong>Test mode</strong> allows teachers to create and manage tests for students to
+          take.
+        </li>
+      </ul>
+    </ProjectContent>
+  </ProjectLayout>
 </template>
 
 <script setup lang="ts">
-import type { MetaItem } from '~/components/ProjectMetaGrid.vue';
+import type { ProjectAction, ProjectMetaItem, ProjectGalleryImage } from '#shared/types/project';
 
-const heroActions = [
+definePageMeta({
+  title: 'AlgoCompare'
+});
+
+const actions: ProjectAction[] = [
   {
     label: 'Website',
     href: 'https://algocompare.kpi.fei.tuke.sk/en',
@@ -66,14 +62,9 @@ const heroActions = [
     icon: 'ak:book-open',
     variant: 'secondary'
   }
-] as {
-  label: string;
-  href: string;
-  icon: string;
-  variant: 'primary' | 'secondary';
-}[];
+];
 
-const metaItems = [
+const metaItems: ProjectMetaItem[] = [
   {
     label: 'Technologies',
     type: 'chips',
@@ -81,9 +72,9 @@ const metaItems = [
   },
   { label: 'Development period', value: '09/2022 - 05/2025' },
   { label: 'Category', value: 'Web application' }
-] as MetaItem[];
+];
 
-const gallery = [
+const gallery: ProjectGalleryImage[] = [
   {
     alt: 'Homepage',
     src: '/images/algocompare/example0.png'

@@ -5,9 +5,10 @@
     <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
       <NuxtLink
         to="/"
-        class="rounded-full border border-slate-200/70 bg-white px-4 py-2 text-sm font-semibold tracking-[0.2em] text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-700/60 dark:bg-slate-900 dark:text-slate-100"
+        class="flex items-center justify-center p-2 text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:text-slate-100"
+        aria-label="Filip Vateha - Home"
       >
-        FV
+        <img src="~/assets/logo.svg" alt="FV Logo" class="h-10 w-10" />
       </NuxtLink>
 
       <nav
@@ -107,8 +108,9 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import VueIcon from '@kalimahapps/vue-icons/VueIcon';
+import type { NavigationLink } from '#shared/types/navigation';
 
-const navLinks = [
+const navLinks: NavigationLink[] = [
   { label: 'About', href: '/#about' },
   { label: 'Education', href: '/#education' },
   { label: 'Certificates', href: '/#certificates' },
@@ -117,7 +119,7 @@ const navLinks = [
   { label: 'Contact', href: '/#contact' }
 ];
 
-const projectLinks = useState<{ label: string; href: string }[]>('projectLinks', () => [
+const projectLinks = useState<NavigationLink[]>('projectLinks', () => [
   { label: 'Shopking', href: '/projects/shopking' },
   { label: 'ShopkingApp', href: '/projects/shopkingapp' },
   { label: 'GVDEditor', href: '/projects/gvdeditor' },

@@ -25,19 +25,9 @@
 </template>
 
 <script setup lang="ts">
-export type MetaItem =
-  | {
-      label: string;
-      value: string;
-      type?: 'text';
-    }
-  | {
-      label: string;
-      type: 'chips';
-      items: string[];
-    };
+import type { ProjectMetaItem } from '#shared/types/project';
 
 defineProps<{
-  items: MetaItem[];
+  items: ProjectMetaItem[];
 }>();
 </script>

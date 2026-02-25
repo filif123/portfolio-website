@@ -10,3 +10,12 @@
     <AppFooter />
   </div>
 </template>
+
+<script setup lang="ts">
+const route = useRoute();
+
+useHead({
+  title: `Portfolio - ${route.meta.title}`,
+  link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+});
+</script>

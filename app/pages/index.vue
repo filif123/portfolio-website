@@ -238,6 +238,10 @@
 <script setup lang="ts">
 import VueIcon from '@kalimahapps/vue-icons/VueIcon';
 
+definePageMeta({
+  title: 'About me'
+});
+
 const heroStats = [
   { value: '2020', label: 'University start' },
   { value: '2023', label: 'Industry start' },
