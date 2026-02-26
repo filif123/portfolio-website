@@ -68,39 +68,53 @@
             </template>
           </ColorScheme>
         </button>
+        <button
+          type="button"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200/70 bg-white text-slate-700 shadow-sm transition hover:shadow-md dark:border-slate-700/60 dark:bg-slate-900 dark:text-slate-100 lg:hidden"
+          aria-label="Toggle menu"
+          @click="mobileMenuOpen = !mobileMenuOpen"
+        >
+          <VueIcon :name="mobileMenuOpen ? 'ph:x' : 'ph:list'" class="text-lg" />
+        </button>
       </div>
     </div>
 
-    <div class="border-t border-slate-200/70 px-4 pb-3 pt-2 dark:border-slate-800/80 lg:hidden">
-      <div class="flex flex-wrap gap-2 text-sm text-slate-600 dark:text-slate-300">
+    <div
+      v-if="mobileMenuOpen"
+      class="border-t border-slate-200/70 px-4 pb-3 pt-3 dark:border-slate-800/80 lg:hidden"
+    >
+      <nav class="space-y-1">
         <a
           v-for="link in navLinks"
           :key="link.href"
           :href="link.href"
-          class="rounded-full border border-slate-200/70 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] transition hover:border-slate-300 hover:text-slate-900 dark:border-slate-700/60 dark:text-slate-200"
+          class="block rounded-lg px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800/50 dark:hover:text-white"
+          @click="mobileMenuOpen = false"
         >
           {{ link.label }}
         </a>
-        <a
-          href="/#projects"
-          class="rounded-full border border-slate-200/70 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] transition hover:border-slate-300 hover:text-slate-900 dark:border-slate-700/60 dark:text-slate-200"
-        >
-          Projects
-        </a>
-      </div>
-      <div
-        class="mt-2 flex flex-wrap items-center gap-1.5 text-[10px] uppercase tracking-[0.15em] text-slate-500 dark:text-slate-400"
-      >
-        <span class="text-[9px] font-medium opacity-70">Projects:</span>
-        <a
-          v-for="project in projectLinks"
-          :key="project.href"
-          :href="project.href"
-          class="rounded-full border border-slate-200/70 px-2 py-0.5 text-[9px] font-semibold text-slate-600 transition hover:border-slate-300 hover:text-slate-900 dark:border-slate-700/60 dark:text-slate-300"
-        >
-          {{ project.label }}
-        </a>
-      </div>
+        <div>
+          <button
+            type="button"
+            class="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800/50 dark:hover:text-white"
+            @click="projectsMenuOpen = !projectsMenuOpen"
+          >
+            Projects
+            <VueIcon :name="projectsMenuOpen ? 'ph:caret-up' : 'ph:caret-down'" class="text-xs" />
+          </button>
+          <div v-if="projectsMenuOpen" class="ml-4 mt-1 space-y-1">
+            <a
+              v-for="project in projectLinks"
+              :key="project.href"
+              :href="project.href"
+              class="block rounded-lg px-3 py-2 text-xs font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800/50 dark:hover:text-white"
+              @click="mobileMenuOpen = false"
+            >
+              {{ project.label }}
+            </a>
+          </div>
+        </div>
+      </nav>
     </div>
   </header>
 </template>
@@ -185,4 +199,7 @@ const handleMouseLeave = () => {
     projectsOpen.value = false;
   }, 150);
 };
+
+const mobileMenuOpen = ref(false);
+const projectsMenuOpen = ref(false);
 </script>

@@ -1,5 +1,7 @@
 ﻿<template>
-  <div class="mt-4 grid grid-cols-6 gap-3">
+  <div
+    class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
+  >
     <div
       v-for="item in items"
       :key="item.name"
