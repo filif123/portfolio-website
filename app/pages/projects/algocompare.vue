@@ -51,15 +51,15 @@ const actions: ProjectAction[] = [
     variant: 'primary'
   },
   {
-    label: 'Website (alternative)',
+    label: 'Website (ALT)',
     href: 'https://algocompare.fvat.sk/en',
     icon: 'ak:globe',
     variant: 'primary'
   },
   {
-    label: 'Docs',
-    href: 'https://algocompare.kpi.fei.tuke.sk/docs',
-    icon: 'ak:book-open',
+    label: 'GitLab (not released as public yet)',
+    href: 'https://gitlab.com/algocompare/algocompare',
+    icon: 'ak:gitlab-fill',
     variant: 'secondary'
   }
 ];
